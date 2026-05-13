@@ -35,8 +35,10 @@ pipeline {
 stage('SonarCloud Analysis') {
     steps {
         withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-            bat 'npm install -g sonar-scanner'
-            bat 'sonar-scanner'
+            bat '''
+            call npm install -g sonar-scanner
+            call sonar-scanner -Dsonar.token=%SONAR_TOKEN%
+            '''
         }
     }
 }
