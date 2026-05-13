@@ -36,7 +36,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
                     bat '''
-                    npx sonar-scanner -Dsonar.token=%SONAR_TOKEN%
+                    set SONAR_TOKEN=%SONAR_TOKEN%
+                    npx sonar-scanner
                     '''
                 }
             }
