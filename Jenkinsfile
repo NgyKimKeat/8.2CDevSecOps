@@ -31,5 +31,16 @@ pipeline {
                 bat 'npm audit || exit /b 0'
             }
         }
+
+        stage('SonarCloud Analysis') {
+            steps {
+                withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+                    bat '''
+                    npm install -g sonar-scanner
+                    sonar-scanner
+                    '''
+                }
+            }
+        }
     }
 }
