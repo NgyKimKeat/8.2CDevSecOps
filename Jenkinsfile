@@ -36,8 +36,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
                     bat '''
-                    call npm install -g sonar-scanner
-                    call sonar-scanner -Dsonar.token=%SONAR_TOKEN%
+                    npm install -g sonar-scanner
+                    sonar-scanner
                     '''
                 }
             }
